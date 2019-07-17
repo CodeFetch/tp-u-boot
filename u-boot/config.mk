@@ -96,30 +96,6 @@ PLATFORM_RELFLAGS =
 PLATFORM_CPPFLAGS =
 PLATFORM_LDFLAGS =
 
-#
-# When cross-compiling on NetBSD, we have to define __PPC__ or else we
-# will pick up a va_list declaration that is incompatible with the
-# actual argument lists emitted by the compiler.
-#
-# [Tested on NetBSD/i386 1.5 + cross-powerpc-netbsd-1.3]
-
-ifeq ($(ARCH),ppc)
-ifeq ($(CROSS_COMPILE),powerpc-netbsd-)
-PLATFORM_CPPFLAGS+= -D__PPC__
-endif
-ifeq ($(CROSS_COMPILE),powerpc-openbsd-)
-PLATFORM_CPPFLAGS+= -D__PPC__
-endif
-endif
-
-ifeq ($(ARCH),arm)
-ifeq ($(CROSS_COMPILE),powerpc-netbsd-)
-PLATFORM_CPPFLAGS+= -D__ARM__
-endif
-ifeq ($(CROSS_COMPILE),powerpc-openbsd-)
-PLATFORM_CPPFLAGS+= -D__ARM__
-endif
-endif
 
 ifdef	ARCH
 sinclude $(TOPDIR)/$(ARCH)_config.mk	# include architecture dependend rules
@@ -150,7 +126,7 @@ HOSTCC		= cc
 else
 HOSTCC		= gcc
 endif
-HOSTCFLAGS	= -Wall -Wstrict-prototypes -g -fomit-frame-pointer
+HOSTCFLAGS	= -Wall -Wstrict-prototypes -O2 -fomit-frame-pointer
 HOSTSTRIP	= strip
 
 #########################################################################
@@ -799,13 +775,6 @@ else
 CFLAGS := $(CPPFLAGS) -Wall -Wstrict-prototypes
 endif
 
-# avoid trigraph warnings while parsing pci.h (produced by NIOS gcc-2.9)
-# this option have to be placed behind -Wall -- that's why it is here
-ifeq ($(ARCH),nios)
-ifeq ($(findstring 2.9,$(shell $(CC) --version)),2.9)
-CFLAGS := $(CPPFLAGS) -Wall -Wno-trigraphs
-endif
-endif
 
 AFLAGS_DEBUG := -Wa,-gstabs
 AFLAGS := $(AFLAGS_DEBUG) -D__ASSEMBLY__ $(CPPFLAGS)
@@ -819,6 +788,10 @@ endif
 #CFLAGS +=-fpic
 #AFLAGS +=-fno-pic
 #endif
+
+# CodeFetch: fixes undefined reference to `_GLOBAL_OFFSET_TABLE_'
+CFLAGS +=-fpic
+AFLAGS +=-fno-pic
 
 LDFLAGS += -Bstatic -T $(LDSCRIPT) -Ttext $(TEXT_BASE) $(PLATFORM_LDFLAGS)
 
