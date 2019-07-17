@@ -1,0 +1,589 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<style type="text/css">
+    /*reset YUI3*/
+    html{
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: 12px;
+        color: #4d4d4d;
+    }
+    body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        
+        cursor: default;
+        
+        overflow-y: hidden;
+        overflow-x: auto;
+    }
+    input,
+    button{
+        font-family: Verdana, Geneva, sans-serif;
+        color: #4d4d4d;
+        border: 0px none;
+        background-color: transparent;
+        cursor: pointer;
+    }
+    label,
+    span,
+    a{
+        vertical-align: middle;
+    }
+    ::-webkit-scrollbar {
+        width: 13px;
+        border: 1px solid #ffffff;
+    }
+    ::-webkit-scrollbar-button {
+        height: 3px;
+        background-color: #ffffff;
+    }
+    ::-webkit-scrollbar-track {
+        background-color: #ffffff;
+        width: 9px;
+    }
+    ::-webkit-scrollbar-track-piece {
+        background-color: #ffffff;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #9BDCEB;
+        border-radius: 35px;
+        border: 3px solid #ffffff;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #9BDCEB;
+    }
+    ::-webkit-scrollbar-corner {
+        background: #ffffff;
+    }
+    ::-webkit-scrollbar-resizer {
+        background: rgb(200,200,200);
+    }
+    body,p{
+        margin: 0;
+    }
+    /*css*/
+    div.top{
+        width: 100%;
+        height: 100%;
+        min-width: 980px;
+        display: block;
+    }
+    div.top-header{
+        background-color: #4acbd6;
+        height: 90px;
+    }
+    div.top-header-wrap{
+        width: 980px;
+        margin: 0 auto;
+        color: #ffffff;
+    }
+    #tp-tag{
+        font-size:30px;
+        padding-top: 21px;
+        padding-left: 5px;
+    }
+    #product-tag{
+        font-size:12px;
+        height: 16px;
+        padding: 2px 0 12px 10px;
+    }
+    .top-content{
+        width: 760px;
+        position: relative;
+        margin: 0 auto;
+    }
+    #upgrade-container{
+        margin-top: 94px;
+    }
+    .error-note-container{
+        width: 570px;
+        margin: 0 auto;
+    }
+    div.file-container{
+        margin: 5px 0;
+    }
+    div.file-container div.fieldlabel-wrap{
+        width: 174px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    div.file-container div.file-wrap-outer{
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    div.file-container div.file-wrap{
+        position: relative;
+        display: inline-block;
+        border: 0 none;
+        background-color: transparent;
+    }
+    div.file-container div.file-text-wrap{
+        z-index: 2;
+        background-color: #f5f5f5;
+        border: 1px solid #e6e6e6;
+        position: relative;
+        display: inline-block;
+        padding: 1px;
+    }
+    input.file-input{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        line-height: 22px;
+        line-height: 32px\0;
+        opacity: 0;
+        background-color: #ffffff;
+        cursor: pointer;
+        z-index: -1;
+        z-index: 1\0;
+        filter: alpha(opacity=0)\0;
+    }
+    div.file-container .file-text-wrap2{
+        width: 197px;
+        height: 26px;
+        display: inline-block;
+        padding: 1px;
+        border: 1px solid #e6e6e6;
+        z-index: -2;
+        z-index: 3\0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        filter: alpha(opacity=0)\0;
+        background-color: #f5f5f5;
+        cursor: pointer;
+    }
+    .file-container .text-wrap{
+        display: inline-block;
+    }
+    .file-container .file-text{
+       width: 164px;
+       height: 22px;
+       line-height: 22px;
+       padding: 2px 8px;
+       overflow: hidden;
+       text-overflow: ellipsis;
+       white-space: nowrap;
+       display: inline-block;
+    }
+    div.file-container div.file-button-wrap{
+        z-index: 0;
+        margin-left: 13px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    div.file-container .file-button{
+        min-width: 80px;
+        min-width: 62px\0;
+        padding: 8px 6px 8px 6px;
+        background-color: #4acbd6;
+        color: #ffffff;
+        border: 0 none;
+        border-radius: 3px;
+	outline: none;
+        font-family: Verdana, Geneva, sans-serif;
+        text-align: center;
+    }
+    div.file-container .file-button:hover{
+        background-color: #23c4c4;
+    }
+    .file-container .button-text{
+        color: #ffffff;
+    }
+    div.button-container{
+        text-align: right;
+        margin: 5px 0;
+    }
+    #upgrade-button-container,#upgrade-file-container{
+        display: inline-block;
+    }
+    div.button-container .button-wrap-outer{
+        display: inline-block;
+        position: relative;
+    }
+    div.button-container .button-wrap{
+        border: 0 none;
+        padding: 0;
+    }
+    div.button-container .button-button{
+        padding: 8px 6px 8px 6px;
+        background-color: #4acbd6;
+        min-width: 90px;
+        border-radius: 3px;
+	outline: none;
+        font-family: Verdana, Geneva, sans-serif;
+        color: #ffffff;
+        text-align: center;
+        vertical-align: middle;
+    }
+    div.button-container .button-button.disabled,div.button-container .button-button.disabled:hover{
+        background-color: #bfbfbf;
+    }
+    div.button-container .button-button:hover{
+        background-color: #23c4c4;
+    }
+
+    div.progressbar-container{
+        display: inline;
+        padding: 0;
+        margin: 5px 0;
+    }
+    div.progressbar-container .progressbar-wrap-outer{
+        position: relative;
+        display: inline-block;
+    }
+    div.progressbar-container .progressbar-wrap{
+        border: 1px solid transparent;
+        display: inline-block;
+    }
+    div.progressbar-container .progressbar-content{
+        width: 365px;
+        height: 6px;
+        border: 0 none;
+        background-color: #eeefef;
+        position: relative;
+        display: inline-block;
+    }
+    div.progressbar-container .progressbar-value{
+        width: 0;
+        overflow: hidden;
+        background-color: #4acbd6;
+        height: 100%;
+        position: absolute;
+        bottom: 0;
+    }
+    div.progressbar-container .progressbar-text,div.progressbar-container .progressbar-status{
+        display: inline-block;
+        width: 50px;
+        text-align: right;
+        font-size: 12px;
+    }
+    div.progressbar-container .progressbar-percentage{
+        margin: 0 6px;
+    }
+    div.progressbar-container .progressbar-status{
+        width: 370px;
+        text-align: left;
+        margin-top: 10px;
+    }
+    div.progressbar-container #upgrade-result{
+        font-size: 12px;
+        display: none;
+		color: #dd6b6b;
+    }
+
+    #upgrade-form{
+        margin-top: 25px;
+        padding-left: 92px;
+    }
+    #upgrade-probar{
+        display: none;
+        margin-top: 15px;
+    }
+    #submit-btn{
+        display: none;
+    }
+</style>
+
+<title>boot</title>
+</head>
+<body id="boot-body">
+    <div class="top" id="boot-main">
+        <div class="top-header">
+            <div class="top-header-wrap">
+                <p id="tp-tag">TP-Link</p>
+                <p id="product-tag">TP_NEED_MODIFIED_PRODUCT_NAME</p>
+            </div>
+        </div>
+        <div id="top-main">
+            <div class="top-content">
+                <div id="upgrade-container">
+                    <div class="error-note-container">
+                        <p id="error-note">System error. The router cannot start up normally.<br/>Please upgrade your router. You can download the firmware file from www.tp-link.com.</p>
+                    </div>
+                    <form action="f2.htm" method="post" id="upgrade-form" target="upgrade-iframe" enctype="multipart/form-data">
+                        <div class="file-container" id="upgrade-file-container">
+                            <div class="fieldlabel-wrap">
+                                <label class="file-label" id="upgrade-label">New Firmware File:</label>
+                            </div>
+                            <div class="file-wrap-outer" id="upgrade-file-wrap">
+                                <div class="file-wrap">
+                                    <div class="file-text-wrap">
+                                        <span class="text-wrap"><label class="file-text text-text" id="upgrade-file-text"></label></span>
+                                    </div>
+                                    <div class="file-button-wrap">
+                                        <button type="button" class="file-button" name="browse">
+                                            <span class="text button-text" id="upgrade-text">Browse</span>
+                                        </button>
+                                    </div>
+                                    <input type="file" name="firmware" class="file-input" id="upgrade-input" />
+                                    <div class="file-text-wrap2" id="file-text-hover">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						<div class="button-container" id="upgrade-button-container">
+							<div class="button-wrap-outer">
+								<div class="button-wrap">
+									<input type="submit" id="submit-btn"/>
+									<button type="button" class="button-button" id="upgrade-button" name="upgrade">
+										<span class="text button-text">Upgrade</span>
+									</button>
+								</div>
+							</div>
+						</div>
+                        <div class="progressbar-container" id="upgrade-probar">
+                            <div class="progressbar-wrap-outer">
+                                <div class="proressbar-wrap" id="upgrade-probar-wrap">
+                                    <div class="progressbar-content" id="upgrade-probar-content">
+                                        <div class="progressbar-value" id="upgrade-probar-value"></div>
+                                    </div>
+                                    <div class="progressbar-text">
+                                        <span class="progressbar-percentage" id="upgrade-probar-percentage"></span>
+                                    </div>
+                                </div>
+                                <div class="progressbar-status">
+                                    <span class="progressbar-result-text" id="upgrade-result"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <iframe id="frame" name="upgrade-iframe" src="" style="display:none" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+var doc_char = doc_char || {};
+doc_char.en_us = {
+    BOOT: {
+        FAILED:                 "Firmware upgrade failed.",
+        SUCCESSED:              "Firmware upgrade success.",
+        INVALID_FILE:           "Upgrade failed. The file is invalid.",
+        INCOMPATIBLE_FIRMWARE:  "Upgrade failed. The firmware version is not compatible with the router.",
+        CONNECT_ERROR:          "Upgrade failed. The computer is disconnected from the network."
+    }
+};
+
+var lan_type = "en_us";
+var _char = doc_char[lan_type];
+
+window.onload = function(){
+    var getObjById = function(id){
+    return document.getElementById(id);
+    };
+    var addClass = function(obj,_class){
+        obj.className = obj.className + " " + _class;
+    };
+    var removeClass = function(obj,_class){
+        obj.className = obj.className.replace(" " + _class, "");
+        obj.className = obj.className.replace(_class, "");
+    };
+    var show = function(obj,style){
+        var _css = style ? "display: " + style : "display: block";
+        setCss(obj, _css);
+    };
+    var hide = function(obj){
+        setCss(obj, "display: none");
+    }
+    var getCss = function(obj,key){
+        return obj.currentStyle ?  obj.currentStyle[key] : obj.ownerDocument.defaultView.getComputedStyle(obj,null)[key];
+    };
+    var setCss = function(obj,_css){
+        obj.style.cssText = _css;
+    };
+    var setProbarValue = function(contentObj, valueObj, percentage){
+        var totalWidth = parseInt(getCss(contentObj,"width"));
+        var valWidth = percentage * totalWidth / 100;
+        setCss(valueObj,"width: " + valWidth + "px")
+    };
+    var stopEventPropagation = function(event){
+        var event = event || window.event;
+        if(event.stopProragation){
+            event.stopPropagation();
+        }
+        else{
+            event.cancelBubble = true;
+        }
+    };
+    var closeSearch = function(){
+        var xmlhttp;
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.abort();
+        mystop();
+    }
+
+    var mystop = function() {
+        if (!!(window.attachEvent && !window.opera)){
+            document.execCommand("stop");
+        }
+        else{
+            window.stop();
+        }
+    }
+
+    var upgrade_form = getObjById("upgrade-form");
+    var upgrade_file_wrap = getObjById("upgrade-file-wrap");
+    var upgrade_input = getObjById("upgrade-input");
+    var upgrade_button = getObjById("upgrade-button");
+    var submit_btn = getObjById("submit-btn");
+    var upgrade_probar = getObjById("upgrade-probar");
+    var upgrade_probar_value = getObjById("upgrade-probar-value");
+    var upgrade_probar_percentage = getObjById("upgrade-probar-percentage");
+    var upgrade_probar_content = getObjById("upgrade-probar-content");
+    var upgrade_probar_wrap = getObjById("upgrade-probar-wrap");
+    var upgrade_probar_result = getObjById("upgrade-result");
+    var upgrade_iframe = getObjById("frame");
+    var file_text_hover = getObjById("file-text-hover");
+
+    var upgrade_id = false;
+	var currentWidth = 0;
+    var currentPercentage = 0;
+
+    upgrade_file_wrap.onclick = function(){
+        upgrade_input.click();
+    }
+    upgrade_input.onchange = function(){
+        var value = upgrade_input.value;
+        var p = /.+(?=\\)/g;
+        var v = value.toString().match(p);
+        if (v && v[0] && v[0].length){
+            v = value.substring(v[0].length+1);
+        }else{
+            v = value;
+        };
+        getObjById("upgrade-file-text").innerHTML = v;
+        upgrade_probar_result.innerHTML = "";
+    }
+    upgrade_button.onclick = function(){
+		hide(upgrade_probar_result);
+        var value = upgrade_input.value;
+        if(!value){
+            upgrade_probar_result.innerHTML = _char.BOOT.INVALID_FILE;
+            show(upgrade_probar_result,"inline-block");
+            hide(upgrade_probar_wrap);
+            show(upgrade_probar,"inline-block");
+            return false;
+        }
+        var regex = /^.+\.bin$/;
+        if (!regex.test(value)){
+            upgrade_probar_result.innerHTML = _char.BOOT.INVALID_FILE;
+            show(upgrade_probar_result,"inline-block");
+            hide(upgrade_probar_wrap);
+            show(upgrade_probar,"inline-block");
+            return false;
+        }
+        upgrade_button.setAttribute("disabled","disabled");
+        addClass(upgrade_button,"disabled");
+        if(upgrade_id){
+            clearInterval(upgrade_id);
+            upgrade_id=false;
+        }
+        upgrade_form.submit();
+        setCss(upgrade_probar_value,"width: 0");
+		upgrade_probar_percentage.innerHTML = "0%";
+        currentWidth = 0;
+        currentPercentage = 0;
+        show(upgrade_probar_wrap,"inline-block");
+        show(upgrade_probar,"inline-block");
+        upgrade_id = setInterval(function(){
+            currentWidth += 1;
+            currentPercentage = (currentWidth * 100 / 365).toFixed(1);
+            if(currentPercentage >=40){
+                upgrade_probar_result.innerHTML = _char.BOOT.FAILED;
+                show(upgrade_probar_result,"inline-block");
+                upgrade_button.removeAttribute("disabled");
+                removeClass(upgrade_button,"disabled");
+                clearInterval(upgrade_id);
+                closeSearch();
+            }
+            upgrade_probar_percentage.innerHTML = currentPercentage + "%";
+            setProbarValue(upgrade_probar_content,upgrade_probar_value,currentPercentage);
+        },860);
+    }
+    file_text_hover.onclick = function(e){
+        stopEventPropagation(e);
+    }
+    if(upgrade_iframe.attachEvent){  
+        upgrade_iframe.attachEvent("onload",function(){
+            onLoadCallback();
+        });  
+    }
+    else{  
+        upgrade_iframe.onload = function(){  
+            onLoadCallback(); 
+        }
+    }  
+    var onLoadCallback = function(){
+		clearInterval(upgrade_id);
+        upgrade_id = false;
+		var doc;
+		try{
+			doc = document.getElementById("frame").contentDocument.body.textContent || document.getElementById("frame").contentDocument.body.innerHTML;
+		}
+		catch(error){
+			upgrade_probar_result.innerHTML = _char.BOOT.CONNECT_ERROR;
+			show(upgrade_probar_result,"inline-block");
+			upgrade_button.removeAttribute("disabled");
+			removeClass(upgrade_button,"disabled");
+			return;
+		};
+		var data = !doc ? "" : JSON.parse(doc);
+		if(typeof(data) == "object" && data.success){
+			currentWidth = 146;
+		}
+		else{
+			switch(data.errorcode){
+			case "-2": upgrade_probar_result.innerHTML = _char.BOOT.INVALID_FILE;break;
+			case "-3": 
+			case "-4":
+			case "-5":
+			case "-6":
+					 upgrade_probar_result.innerHTML = _char.BOOT.INCOMPATIBLE_FIRMWARE;break;
+			default: upgrade_probar_result.innerHTML = _char.BOOT.FAILED;break;
+			}
+			upgrade_probar_percentage.innerHTML = "40%";
+			setProbarValue(upgrade_probar_content,upgrade_probar_value,40);
+			show(upgrade_probar_result,"inline-block");
+			upgrade_button.removeAttribute("disabled");
+			removeClass(upgrade_button,"disabled");
+			return false;
+		}
+
+        upgrade_id = setInterval(function(){
+            currentWidth += 1;
+			currentPercentage = (currentWidth * 100 / 365).toFixed(1);
+            if(currentPercentage >=100){
+                currentPercentage = 100;
+                upgrade_probar_result.innerHTML = _char.BOOT.SUCCESSED;
+                show(upgrade_probar_result,"inline-block");
+                //upgrade_button.removeAttribute("disabled");
+                //removeClass(upgrade_button,"disabled");
+                clearInterval(upgrade_id);
+				location.href="/";
+            }
+            upgrade_probar_percentage.innerHTML = currentPercentage + "%";
+            setProbarValue(upgrade_probar_content,upgrade_probar_value,currentPercentage);
+        },822);
+    }
+}
+</script></body></html>
